@@ -1,6 +1,6 @@
 mysql.cfg
 server.cfg
-resources/assets/
+resources/\[assets\]/*
 resources/[vehicles]/
 resources/[map]/
 resources/addontrees
