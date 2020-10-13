@@ -463,9 +463,9 @@ function SellToPed(ped)
                         SellingPrice = math.random(Config.Stock[SellingData.Hotdog].Price.min, Config.Stock[SellingData.Hotdog].Price.max)
                     end
                 end
-                QBCore.Functions.DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z, '[7] Sale '..HotdogsForSale..'x voor €'..(HotdogsForSale * SellingPrice)..',- / [8] Afwijzen')
+                QBCore.Functions.DrawText3D(pedCoords.x, pedCoords.y, pedCoords.z, '[7] Sale '..HotdogsForSale..'x voor ₹'..(HotdogsForSale * SellingPrice)..',- / [8] Afwijzen')
                 if IsControlJustPressed(0, Keys["7"]) or IsDisabledControlJustPressed(0, Keys["7"]) then
-                    QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) verkocht voor €'..(HotdogsForSale * SellingPrice)..',-', 'success')
+                    QBCore.Functions.Notify(HotdogsForSale..'x Hotdog(\'s) verkocht voor ₹'..(HotdogsForSale * SellingPrice)..',-', 'success')
                     TriggerServerEvent('qb-hotdogjob:server:Sell', HotdogsForSale, SellingPrice)
                     SellingData.HasTarget = false
                     local Myped = GetPlayerPed(-1)

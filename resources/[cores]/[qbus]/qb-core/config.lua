@@ -1,6 +1,6 @@
 QBConfig = {}
 
-QBConfig.MaxPlayers = GetConvarInt('sv_maxclients', 64) -- Gets max players from config file, default 32
+QBConfig.MaxPlayers = GetConvarInt('sv_maxclients', 32) -- Gets max players from config file, default 32
 QBConfig.IdentifierType = "steam" -- Set the identifier type (can be: steam, license)
 QBConfig.DefaultSpawn = {x=-1035.71,y=-2731.87,z=12.86,a=0.0}
 
@@ -9,8 +9,8 @@ QBConfig.Money.MoneyTypes = {['cash'] = 500, ['bank'] = 5000, ['crypto'] = 0 } -
 QBConfig.Money.DontAllowMinus = {'cash', 'crypto'} -- Money that is not allowed going in minus
 
 QBConfig.Player = {}
-QBConfig.Player.MaxWeight = 120000 -- Max weight a player can carry (currently 120kg, written in grams)
-QBConfig.Player.MaxInvSlots = 41 -- Max inventory slots for a player
+QBConfig.Player.MaxWeight = 150000 -- Max weight a player can carry (currently 120kg, written in grams)
+QBConfig.Player.MaxInvSlots = 30 -- Max inventory slots for a player
 QBConfig.Player.Bloodtypes = {
     "A+",
     "A-",

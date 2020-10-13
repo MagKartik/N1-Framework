@@ -100,10 +100,10 @@ $(document).on("click", ".identity-page-block", function(e){
         selectedIdentity = this;
         if (idType== "id-kaart") {
             $(".request-identity-button").fadeIn(100);
-            $(".request-identity-button").html("<p>request ID-card (€50,-)</p>")
+            $(".request-identity-button").html("<p>request ID-card (₹50,-)</p>")
         } else {
             $(".request-identity-button").fadeIn(100);
-            $(".request-identity-button").html("<p>requist driver license (€50,-)</p>")
+            $(".request-identity-button").html("<p>requist driver license (₹50,-)</p>")
         }
     } else if (selectedIdentity == this) {
         $(this).removeClass("identity-selected");
@@ -114,9 +114,9 @@ $(document).on("click", ".identity-page-block", function(e){
         $(this).addClass("identity-selected");
         selectedIdentity = this;
         if($(this).data('type') == "id-kaart") {
-            $(".request-identity-button").html("<p>request ID-card (€50,-)</p>")
+            $(".request-identity-button").html("<p>request ID-card (₹50,-)</p>")
         } else {
-            $(".request-identity-button").html("<p>requist driver license (€50,-)</p>")
+            $(".request-identity-button").html("<p>requist driver license (₹50,-)</p>")
         }
     }
 });

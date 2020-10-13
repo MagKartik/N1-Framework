@@ -46,7 +46,7 @@ AddEventHandler('qb-diving:server:BuyBoat', function(boatModel, BerthId)
         else
             missingMoney = (BoatPrice - PlayerMoney.cash)
         end
-        TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money, you are missing €'..missingMoney, 'error', 4000)
+        TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money, you are missing ₹'..missingMoney, 'error', 4000)
     end
 end)
 

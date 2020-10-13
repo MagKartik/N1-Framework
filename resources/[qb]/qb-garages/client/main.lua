@@ -367,7 +367,7 @@ function DepotLijst()
                 if QBCore.Shared.Vehicles[v.vehicle]["brand"] ~= nil then
                     label = QBCore.Shared.Vehicles[v.vehicle]["brand"].." "..QBCore.Shared.Vehicles[v.vehicle]["name"]
                 end
-                Menu.addButton(label, "TakeOutDepotVehicle", v, v.state .. " (€"..v.depotprice..",-)", " Motor: " .. enginePercent.."%", " Body: " .. bodyPercent.."%", " Fuel: "..currentFuel.."%")
+                Menu.addButton(label, "TakeOutDepotVehicle", v, v.state .. " (₹"..v.depotprice..",-)", " Motor: " .. enginePercent.."%", " Body: " .. bodyPercent.."%", " Fuel: "..currentFuel.."%")
             end
         end
             

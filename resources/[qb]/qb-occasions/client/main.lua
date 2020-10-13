@@ -75,7 +75,7 @@ Citizen.CreateThread(function()
                         if not IsPedInAnyVehicle(ped) then
                             if not isConfirming then
                                 DrawText3Ds(vehPos.x, vehPos.y, vehPos.z + 1.45, '~g~E~w~ To view the vehicle')
-                                DrawText3Ds(vehPos.x, vehPos.y, vehPos.z + 1.25, QBCore.Shared.Vehicles[Config.OccasionSlots[i]["model"]]["name"]..', Price: €'..Config.OccasionSlots[i]["price"]..',-')
+                                DrawText3Ds(vehPos.x, vehPos.y, vehPos.z + 1.25, QBCore.Shared.Vehicles[Config.OccasionSlots[i]["model"]]["name"]..', Price: ₹'..Config.OccasionSlots[i]["price"]..',-')
                                 if Config.OccasionSlots[i]["owner"] == QBCore.Functions.GetPlayerData().citizenid then
                                     DrawText3Ds(vehPos.x, vehPos.y, vehPos.z + 1.05, '~r~G~w~ To take back the vehicle')
                                     if IsControlJustPressed(0, Keys["G"]) then
@@ -290,7 +290,7 @@ function sellVehicleWait(price)
     QBCore.Functions.DeleteVehicle(GetVehiclePedIsIn(GetPlayerPed(-1)))
     Citizen.Wait(1500)
     DoScreenFadeIn(250)
-    QBCore.Functions.Notify('Your car is for sale for €'..price..',-', 'success')
+    QBCore.Functions.Notify('Your car is for sale for ₹'..price..',-', 'success')
     PlaySound(-1, "SELECT", "HUD_FRONTEND_DEFAULT_SOUNDSET", 0, 0, 1)
 end
 

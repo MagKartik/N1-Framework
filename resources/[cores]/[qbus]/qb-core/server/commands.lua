@@ -64,7 +64,7 @@ QBCore.Commands.Add("removepermission", "Remove permissions from someone", {{nam
 	end
 end, "god")
 
-QBCore.Commands.Add("sv", "Spawn a vehicle", {{name="model", help="Model name of the vehicle"}}, true, function(source, args)
+QBCore.Commands.Add("car", "Spawn a vehicle", {{name="model", help="Model name of the vehicle"}}, true, function(source, args)
 	TriggerClientEvent('QBCore:Command:SpawnVehicle', source, args[1])
 end, "admin")
 
@@ -98,7 +98,7 @@ QBCore.Commands.Add("setmoney", "set a players money amount", {{name="id", help=
 	end
 end, "admin")
 
-QBCore.Commands.Add("setjob", "Assign a job to a player", {{name="id", help="Speler ID"}, {name="job", help="Job name"}}, true, function(source, args)
+QBCore.Commands.Add("setjob", "Assign a job to a player", {{name="id", help="Player ID"}, {name="job", help="Job name"}}, true, function(source, args)
 	local Player = QBCore.Functions.GetPlayer(tonumber(args[1]))
 	if Player ~= nil then
 		Player.Functions.SetJob(tostring(args[2]))

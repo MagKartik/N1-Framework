@@ -191,7 +191,7 @@
                             <?php foreach($lawdata as $law){?>
                                 <div class="law-item" data-toggle="tooltip" data-html="true" title="<?php echo $law['description']; ?>">
                                     <h5 class="lawlist-title"><?php echo $law['name']; ?></h5>
-                                    <p class="lawlist-fine">Boete: €<?php echo $law['fine']; ?></p>
+                                    <p class="lawlist-fine">Boete: ₹<?php echo $law['fine']; ?></p>
                                     <p class="lawlist-months">Cel: <?php echo $law['months']; ?> maanden</p>
                                 </div>
                             <?php }?>

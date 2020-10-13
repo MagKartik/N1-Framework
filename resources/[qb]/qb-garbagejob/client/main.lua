@@ -199,7 +199,7 @@ Citizen.CreateThread(function()
                                 QBCore.Functions.TriggerCallback('qb-garbagejob:server:CheckBail', function(DidBail)
                                     if DidBail then
                                         BringBackCar()
-                                        QBCore.Functions.Notify("You got back your €1000,- deposit!")
+                                        QBCore.Functions.Notify("You got back your ₹1000,- deposit!")
                                     else
                                         QBCore.Functions.Notify("You haven\'t put a deposit on this vehicle..")
                                     end
@@ -224,11 +224,11 @@ Citizen.CreateThread(function()
                                             GarbageLocation = 1
                                             IsWorking = true
                                             SetGarbageRoute()
-                                            QBCore.Functions.Notify("You paid a €1000,- deposit!")
+                                            QBCore.Functions.Notify("You paid a ₹1000,- deposit!")
                                             QBCore.Functions.Notify("You started working, location has been set on your GPS!")
                                         end, coords, true)
                                     else
-                                        QBCore.Functions.Notify("You don\'t have enough money for the deposit.. A deposit costs €1000,-")
+                                        QBCore.Functions.Notify("You don\'t have enough money for the deposit.. A deposit costs ₹1000,-")
                                     end
                                 end)
                             end

@@ -64,7 +64,7 @@ function AddTransaction(safe, type, amount, Player, Automated)
         label = "Deposited in"
         color = "green"
     end
-	TriggerEvent("qb-log:server:CreateLog", "moneysafes", type, color, "**" .. name .. "** (citizenid: *" .. cid .. "* | id: *(" .. _source .. ")* has **€" .. amount .. "** " .. label .. " the **" .. safe .. "** safe.")
+	TriggerEvent("qb-log:server:CreateLog", "moneysafes", type, color, "**" .. name .. "** (citizenid: *" .. cid .. "* | id: *(" .. _source .. ")* has **₹" .. amount .. "** " .. label .. " the **" .. safe .. "** safe.")
 end
 
 RegisterServerEvent('qb-moneysafe:server:DepositMoney')
@@ -94,7 +94,7 @@ AddEventHandler('qb-moneysafe:server:DepositMoney', function(safe, amount, sende
             QBCore.Functions.ExecuteSql(false, "INSERT INTO `moneysafes` (`safe`, `money`, `transactions`) VALUES ('"..safe.."', '"..Config.Safes[safe].money.."', '"..json.encode(Config.Safes[safe].transactions).."')")
         end
         TriggerClientEvent('qb-moneysafe:client:UpdateSafe', -1, Config.Safes[safe], safe)
-        TriggerClientEvent('QBCore:Notify', src, "You have put €"..amount..",- in the safe", "success")
+        TriggerClientEvent('QBCore:Notify', src, "You have put ₹"..amount..",- in the safe", "success")
     end)
 end)
 
@@ -108,7 +108,7 @@ AddEventHandler('qb-moneysafe:server:WithdrawMoney', function(safe, amount)
         Config.Safes[safe].money = (Config.Safes[safe].money - amount)
         QBCore.Functions.ExecuteSql(false, "UPDATE `moneysafes` SET money = '"..Config.Safes[safe].money.."', transactions = '"..json.encode(Config.Safes[safe].transactions).."' WHERE `safe` = '"..safe.."'")
         TriggerClientEvent('qb-moneysafe:client:UpdateSafe', -1, Config.Safes[safe], safe)
-        TriggerClientEvent('QBCore:Notify', src, "You took €"..amount..",- out of the safe", "success")
+        TriggerClientEvent('QBCore:Notify', src, "You took ₹"..amount..",- out of the safe", "success")
         Player.Functions.AddMoney('cash', amount)
     else
         TriggerClientEvent('QBCore:Notify', src, "There is not enough money in the safe.", "error")

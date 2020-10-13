@@ -115,7 +115,7 @@ AddEventHandler('qb-occasions:server:buyVehicle', function(vehicleData)
                 TriggerEvent('qb-phone:server:sendNewMailToOffline', SellerCitizenId, {
                     sender = "Mosleys Occasions",
                     subject = "You sold a vehicle!",
-                    message = "Je "..QBCore.Shared.Vehicles[result[1].model].name.." has been sold for €"..result[1].price..",-!"
+                    message = "Je "..QBCore.Shared.Vehicles[result[1].model].name.." has been sold for ₹"..result[1].price..",-!"
                 })
             elseif Player.PlayerData.money.bank >= result[1].price then
                 local SellerCitizenId = result[1].seller
@@ -154,7 +154,7 @@ AddEventHandler('qb-occasions:server:buyVehicle', function(vehicleData)
                 TriggerEvent('qb-phone:server:sendNewMailToOffline', SellerCitizenId, {
                     sender = "Mosleys Occasions",
                     subject = "You sold a vehicle!",
-                    message = "Je "..QBCore.Shared.Vehicles[result[1].model].name.." has been sold for €"..result[1].price..",-!"
+                    message = "Je "..QBCore.Shared.Vehicles[result[1].model].name.." has been sold for ₹"..result[1].price..",-!"
                 })
             else
                 TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough cash...', 'error', 3500)

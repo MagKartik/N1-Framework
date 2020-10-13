@@ -20,7 +20,7 @@ AddEventHandler('bank:withdraw', function(amount)
     local amount = tonumber(amount)
     if bankamount >= amount and amount > 0 then
       ply.Functions.RemoveMoney('bank', amount, "Bank withdraw")
-      TriggerEvent("qb-log:server:CreateLog", "banking", "Withdraw", "red", "**"..GetPlayerName(src) .. "** has withdrawn €"..amount.." from their bank account.")
+      TriggerEvent("qb-log:server:CreateLog", "banking", "Withdraw", "red", "**"..GetPlayerName(src) .. "** has withdrawn ₹"..amount.." from their bank account.")
       ply.Functions.AddMoney('cash', amount, "Bank withdraw")
     else
       TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money on your bank..', 'error')
@@ -35,7 +35,7 @@ AddEventHandler('bank:deposit', function(amount)
     local amount = tonumber(amount)
     if cashamount >= amount and amount > 0 then
       ply.Functions.RemoveMoney('cash', amount, "Bank depost")
-      TriggerEvent("qb-log:server:CreateLog", "banking", "Deposit", "green", "**"..GetPlayerName(src) .. "** has deposited €"..amount.." to their bank account.")
+      TriggerEvent("qb-log:server:CreateLog", "banking", "Deposit", "green", "**"..GetPlayerName(src) .. "** has deposited ₹"..amount.." to their bank account.")
       ply.Functions.AddMoney('bank', amount, "Bank depost")
     else
       TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough cash..', 'error')
@@ -84,10 +84,10 @@ AddEventHandler('banking:server:giveCash', function(trgtId, amount)
     Player.Functions.RemoveMoney('cash', amount, "Cash given to "..Player.PlayerData.citizenid)
     Target.Functions.AddMoney('cash', amount, "Cash received from "..Target.PlayerData.citizenid)
 
-    TriggerEvent("qb-log:server:CreateLog", "banking", "Give cash", "blue", "**"..GetPlayerName(src) .. "** has given €"..amount.." to **" .. GetPlayerName(trgtId) .. "**")
+    TriggerEvent("qb-log:server:CreateLog", "banking", "Give cash", "blue", "**"..GetPlayerName(src) .. "** has given ₹"..amount.." to **" .. GetPlayerName(trgtId) .. "**")
     
-    TriggerClientEvent('QBCore:Notify', trgtId, "You received €"..amount.." from "..Player.PlayerData.charinfo.firstname.."!", 'success')
-    TriggerClientEvent('QBCore:Notify', src, "You gave €"..amount.." to "..Target.PlayerData.charinfo.firstname.."!", 'success')
+    TriggerClientEvent('QBCore:Notify', trgtId, "You received ₹"..amount.." from "..Player.PlayerData.charinfo.firstname.."!", 'success')
+    TriggerClientEvent('QBCore:Notify', src, "You gave ₹"..amount.." to "..Target.PlayerData.charinfo.firstname.."!", 'success')
   else
     TriggerEvent("qb-anticheat:server:banPlayer", "Cheating")
     TriggerEvent("qb-log:server:CreateLog", "anticheat", "Banned player! (Not really its a test, duhhhhh)", "red", "** @everyone " ..GetPlayerName(player).. "** tried to give **"..amount.." to himself")  

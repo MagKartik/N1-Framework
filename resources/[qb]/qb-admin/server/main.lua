@@ -26,7 +26,7 @@ RegisterServerEvent('qb-admin:server:kickPlayer')
 AddEventHandler('qb-admin:server:kickPlayer', function(playerId, reason)
     local src = source
     if QBCore.Functions.HasPermission(src, permissions["kick"]) then
-        DropPlayer(playerId, "You have been kicked from the server:\n"..reason.."\n\n🔸 Join our Discord for further information: https://discord.gg/ChangeInqb-admin")
+        DropPlayer(playerId, "You have been kicked from the server:\n"..reason.."\n\n🔸 Join our Discord for further information: https://discord.gg/AbxSaqG")
     end
 end)
 
@@ -41,7 +41,7 @@ AddEventHandler('qb-admin:server:serverKick', function(reason)
     if QBCore.Functions.HasPermission(src, permissions["kickall"]) then
         for k, v in pairs(QBCore.Functions.GetPlayers()) do
             if v ~= src then 
-                DropPlayer(v, "You have been kicked from the server:\n"..reason.."\n\n🔸 Join our Discord for further information: https://discord.gg/ChangeInqb-admin")
+                DropPlayer(v, "You have been kicked from the server:\n"..reason.."\n\n🔸 Join our Discord for further information: https://discord.gg/AbxSaqG")
             end
         end
     end
@@ -59,7 +59,7 @@ AddEventHandler('qb-admin:server:banPlayer', function(playerId, time, reason)
         local timeTable = os.date("*t", banTime)
         TriggerClientEvent('chatMessage', -1, "BANHAMMER", "error", GetPlayerName(playerId).." has been banned for: "..reason.." "..suffix[math.random(1, #suffix)])
         QBCore.Functions.ExecuteSql(false, "INSERT INTO `bans` (`name`, `steam`, `license`, `discord`,`ip`, `reason`, `expire`, `bannedby`) VALUES ('"..GetPlayerName(playerId).."', '"..GetPlayerIdentifiers(playerId)[1].."', '"..GetPlayerIdentifiers(playerId)[2].."', '"..GetPlayerIdentifiers(playerId)[3].."', '"..GetPlayerIdentifiers(playerId)[4].."', '"..reason.."', "..banTime..", '"..GetPlayerName(src).."')")
-        DropPlayer(playerId, "You have been banished from the server:\n"..reason.."\n\nBan expires: "..timeTable["day"].. "/" .. timeTable["month"] .. "/" .. timeTable["year"] .. " " .. timeTable["hour"].. ":" .. timeTable["min"] .. "\n🔸 Join our Discord for further information: https://discord.gg/ChangeInqb-admin")
+        DropPlayer(playerId, "You have been banished from the server:\n"..reason.."\n\nBan expires: "..timeTable["day"].. "/" .. timeTable["month"] .. "/" .. timeTable["year"] .. " " .. timeTable["hour"].. ":" .. timeTable["min"] .. "\n🔸 Join our Discord for further information: https://discord.gg/AbxSaqG")
     end
 end)
 

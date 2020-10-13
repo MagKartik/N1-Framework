@@ -917,7 +917,7 @@ $(document).on('click', '.submit-transfer-btn', function(e){
                 if (amountVal > 0) {
                     $('.transfer-money-container').css({"display":"block"}).animate({top: "103%",}, 250, function(){
                         $('.transfer-money-container').css({'display':'none'});
-                        qbPhone.Notify('QBank', 'success', 'Je hebt € '+amountVal+' overgemaakt naar '+ibanVal+'!', 3500);
+                        qbPhone.Notify('QBank', 'success', 'Je hebt ₹ '+amountVal+' overgemaakt naar '+ibanVal+'!', 3500);
     
                         $.post('http://qb-phone/transferMoney', JSON.stringify({
                             amount: amountVal,

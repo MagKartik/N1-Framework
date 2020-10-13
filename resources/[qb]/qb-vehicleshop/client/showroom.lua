@@ -259,7 +259,7 @@ function GetCatVehicles(catergory)
     ClearMenu()
     Menu.addButton("close Menu", "close", nil) 
     for k, v in pairs(shopVehicles[catergory]) do
-        Menu.addButton(shopVehicles[catergory][k].name, "SelectVehicle", v, catergory, "€"..shopVehicles[catergory][k]["price"])
+        Menu.addButton(shopVehicles[catergory][k].name, "SelectVehicle", v, catergory, "₹"..shopVehicles[catergory][k]["price"])
     end
 end
 
@@ -355,7 +355,7 @@ Citizen.CreateThread(function()
                     inRange = true
                     if SellDistance < 1 then
                         if not SellStarted then
-                            DrawText3Ds(QB.QuickSell.x, QB.QuickSell.y, QB.QuickSell.z, '~b~E~w~ - Sell vehicle for ~g~€'..math.ceil(VehicleData["price"] / 100 * 60))
+                            DrawText3Ds(QB.QuickSell.x, QB.QuickSell.y, QB.QuickSell.z, '~b~E~w~ - Sell vehicle for ~g~₹'..math.ceil(VehicleData["price"] / 100 * 60))
                             if IsControlJustPressed(0, Keys["E"]) then
                                 SellStarted = true
                             end
@@ -365,7 +365,7 @@ Citizen.CreateThread(function()
                                 SellStarted = false
                                 QBCore.Functions.TriggerCallback('qb-vehicleshop:server:SellVehicle', function(SoldVehicle)
                                     if SoldVehicle then
-                                        TriggerEvent("qb-phone-new:client:BankNotify", "Er is €"..math.ceil(VehicleData["price"] / 100 * 60).." bijgeschreven")
+                                        TriggerEvent("qb-phone-new:client:BankNotify", "Er is ₹"..math.ceil(VehicleData["price"] / 100 * 60).." bijgeschreven")
                                         local veh = GetVehiclePedIsIn(ped)
                                         QBCore.Functions.DeleteVehicle(veh)
                                     else
@@ -416,7 +416,7 @@ Citizen.CreateThread(function()
                                 DrawText3Ds(QB.ShowroomVehicles[ClosestVehicle].coords.x, QB.ShowroomVehicles[ClosestVehicle].coords.y, QB.ShowroomVehicles[ClosestVehicle].coords.z + 1.8, '~g~G~w~ - Change vehicle  (~g~'..displayName..'~w~)')
                             end
                             if not buySure then
-                                DrawText3Ds(QB.ShowroomVehicles[ClosestVehicle].coords.x, QB.ShowroomVehicles[ClosestVehicle].coords.y, QB.ShowroomVehicles[ClosestVehicle].coords.z + 1.70, '~g~E~w~ - Buy vehicle (~g~€'..vehPrice..'~w~)')
+                                DrawText3Ds(QB.ShowroomVehicles[ClosestVehicle].coords.x, QB.ShowroomVehicles[ClosestVehicle].coords.y, QB.ShowroomVehicles[ClosestVehicle].coords.z + 1.70, '~g~E~w~ - Buy vehicle (~g~₹'..vehPrice..'~w~)')
                             elseif buySure then
                                 DrawText3Ds(QB.ShowroomVehicles[ClosestVehicle].coords.x, QB.ShowroomVehicles[ClosestVehicle].coords.y, QB.ShowroomVehicles[ClosestVehicle].coords.z + 1.65, 'Are you sure? | ~g~[7]~w~ Yes -/- ~r~[8]~w~ No')
                             end
@@ -460,7 +460,7 @@ Citizen.CreateThread(function()
                                 drawMenuButton(button,vehshop.menu.x,y,selected)
                                 if button.price ~= nil then
 
-                                    drawMenuRight("€"..button.price,vehshop.menu.x,y,selected)
+                                    drawMenuRight("₹"..button.price,vehshop.menu.x,y,selected)
 
                                 end
                                 y = y + 0.04

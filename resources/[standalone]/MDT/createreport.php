@@ -292,7 +292,7 @@
                             <?php foreach($lawsedit_array as $issalaw) { ?>
                                 <div class="report-law-item" data-toggle="tooltip" data-html="true" title="<?php echo $issalaw["description"]; ?>">
                                     <h5 class="lawlist-title"><?php echo $issalaw["name"]; ?></h5>
-                                    <p class="lawlist-fine">Boete: €<span class="fine-amount"><?php echo $issalaw["fine"]; ?></span></p>
+                                    <p class="lawlist-fine">Boete: ₹<span class="fine-amount"><?php echo $issalaw["fine"]; ?></span></p>
                                     <p class="lawlist-months">Cel: <span class="months-amount"><?php echo $issalaw["months"]; ?></span> months</p>
                                 </div>
                             <?php } ?>

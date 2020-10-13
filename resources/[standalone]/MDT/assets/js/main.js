@@ -14,7 +14,7 @@ $(".report-law-item-tab").click(function() {
     var fine = $(this).find(".fine-amount").html();
     var months = $(this).find(".months-amount").html();
     var description = $(this).attr("title");
-    $(".added-laws").append('<div class="report-law-item" data-toggle="tooltip" data-html="true" title="'+description+'"><input type="hidden" class="lawlist-id" value="'+id+'"><h5 class="lawlist-title">'+lawtitle+'</h5><p class="lawlist-fine">Boete: €<span class="fine-amount">'+fine+'</span></p><p class="lawlist-months">Cel: <span class="months-amount">'+months+'</span> maanden</p></div>')
+    $(".added-laws").append('<div class="report-law-item" data-toggle="tooltip" data-html="true" title="'+description+'"><input type="hidden" class="lawlist-id" value="'+id+'"><h5 class="lawlist-title">'+lawtitle+'</h5><p class="lawlist-fine">Boete: ₹<span class="fine-amount">'+fine+'</span></p><p class="lawlist-months">Cel: <span class="months-amount">'+months+'</span> maanden</p></div>')
     CalculatePunishment()
     $(".report-law-item").click(function() {
         $(this).remove();
@@ -53,7 +53,7 @@ function CalculatePunishment() {
         totalMonths += parseInt(months);
         punishmentValue =  punishmentValue + "," + id;
     });
-    $(".total-punishment").html("Totaal: €"+totalFine+" - "+totalMonths+" maanden")
+    $(".total-punishment").html("Totaal: ₹"+totalFine+" - "+totalMonths+" maanden")
     $(".report-law-punishments").val(punishmentValue);
     $(".fines-law").val(totalFine);
 }

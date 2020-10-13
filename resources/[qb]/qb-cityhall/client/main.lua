@@ -113,7 +113,7 @@ Citizen.CreateThread(function()
             DrawMarker(2, Config.DriverTest.coords.x, Config.DriverTest.coords.y, Config.DriverTest.coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 155, 152, 234, 155, false, false, false, true, false, false, false)
                 if GetDistanceBetweenCoords(pos, Config.DriverTest.coords.x, Config.DriverTest.coords.y, Config.DriverTest.coords.z, true) < 1.5 then
                     if creatingCompany then
-                        qbCityhall.DrawText3Ds(Config.DriverTest.coords, '~g~E~w~ - Create company (€'..Config.CompanyPrice..') | ~r~G~w~ - Cancel')
+                        qbCityhall.DrawText3Ds(Config.DriverTest.coords, '~g~E~w~ - Create company (₹'..Config.CompanyPrice..') | ~r~G~w~ - Cancel')
                         if IsControlJustPressed(0, Keys["E"]) then
                             TriggerServerEvent("qb-companies:server:createCompany", currentName)
                             creatingCompany = false
@@ -203,7 +203,7 @@ RegisterNUICallback('requestId', function(data)
         local idType = data.idType
 
         TriggerServerEvent('qb-cityhall:server:requestId', idTypes[idType])
-        QBCore.Functions.Notify('You requested your '..idTypes[idType].label..' for €50', 'success', 3500)
+        QBCore.Functions.Notify('You requested your '..idTypes[idType].label..' for ₹50', 'success', 3500)
     else
         QBCore.Functions.Notify('Unfortunately it isnt working...', 'error')
     end

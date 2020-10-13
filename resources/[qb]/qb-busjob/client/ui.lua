@@ -53,7 +53,7 @@ function halte(naam)
 end
 
 function geld(amount)
-	local stat = "€"..amount
+	local stat = "₹"..amount
 	SendNUIMessage({
 		text = stat,
 		meta = 'geld'
