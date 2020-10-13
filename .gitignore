@@ -1,6 +1,6 @@
 mysql.cfg
 server.cfg
-resources/[assets]
-resources/[vehicles]
-resources/[map]
+resources/[assets]/
+resources/[vehicles]/
+resources/[map]/
 server_logo.png
