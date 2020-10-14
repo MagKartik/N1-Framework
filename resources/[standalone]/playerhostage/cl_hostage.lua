@@ -1,10 +1,10 @@
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
-		if QBCore == nil then
-			TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+		if N1Core == nil then
+			TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 			Citizen.Wait(200)
 		end
 	end
@@ -49,7 +49,7 @@ function takeHostage()
 					NoWeapon = false
 					break
 				else
-					QBCore.Functions.Notify("You have no ammunition.")
+					N1Core.Functions.Notify("You have no ammunition.")
 					return			
 				end	
 			else
@@ -58,7 +58,7 @@ function takeHostage()
 		end
 
 		if NoWeapon then
-			QBCore.Functions.Notify("You can\'t take someone hostage with this weapon")
+			N1Core.Functions.Notify("You can\'t take someone hostage with this weapon")
 			return
 		end
 
@@ -83,7 +83,7 @@ function takeHostage()
 			TriggerServerEvent('cmg3_animations:sync', closestPlayer, lib,lib2, anim1, anim2, distans, distans2, height,target,length,spin,controlFlagMe,controlFlagTarget,animFlagTarget,attachFlag, false)
 		end
 	else
-		QBCore.Functions.Notify("No one nearby")
+		N1Core.Functions.Notify("No one nearby")
 	end
 	canTakeHostage = false 
 end 

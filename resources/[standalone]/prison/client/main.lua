@@ -10,12 +10,12 @@ Keys = {
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
-QBCore = nil
+N1Core = nil
 Citizen.CreateThread(function() 
     while true do
         Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent("QBCore:GetObject", function(obj) QBCore = obj end)    
+        if N1Core == nil then
+            TriggerEvent("N1Core:GetObject", function(obj) N1Core = obj end)    
             Citizen.Wait(200)
         end
     end
@@ -40,7 +40,7 @@ Citizen.CreateThread(function()
 				jailTime = jailTime - 1
 				if jailTime <= 0 then
 					jailTime = 0
-					QBCore.Functions.Notify("Your time is up! Check yourself out at the visitor center", "success", 10000)
+					N1Core.Functions.Notify("Your time is up! Check yourself out at the visitor center", "success", 10000)
 				end
 				TriggerServerEvent("prison:server:SetJailStatus", jailTime)
 			end
@@ -50,15 +50,15 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
-	QBCore.Functions.TriggerCallback('prison:server:IsAlarmActive', function(active)
+RegisterNetEvent('N1Core:Client:OnPlayerLoaded')
+AddEventHandler('N1Core:Client:OnPlayerLoaded', function()
+	N1Core.Functions.TriggerCallback('prison:server:IsAlarmActive', function(active)
 		if active then
 			TriggerEvent('prison:client:JailAlarm', true)
 		end
 	end)
 
-	PlayerJob = QBCore.Functions.GetPlayerData().job
+	PlayerJob = N1Core.Functions.GetPlayerData().job
 end)
 
 function CreateCellsBlip()
@@ -118,16 +118,16 @@ Citizen.CreateThread(function()
 			if inJail then
 				local pos = GetEntityCoords(GetPlayerPed(-1))
 				if (GetDistanceBetweenCoords(pos.x, pos.y, pos.z, Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, true) < 1.5) then
-					QBCore.Functions.DrawText3D(Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, "~g~E~w~ - Check time")
+					N1Core.Functions.DrawText3D(Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, "~g~E~w~ - Check time")
 					if IsControlJustReleased(0, Keys["E"]) then
 						TriggerEvent("prison:client:Leave")
 					end
 				elseif (GetDistanceBetweenCoords(pos.x, pos.y, pos.z, Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, true) < 2.5) then
-					QBCore.Functions.DrawText3D(Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, "Check time")
+					N1Core.Functions.DrawText3D(Config.Locations["freedom"].coords.x, Config.Locations["freedom"].coords.y, Config.Locations["freedom"].coords.z, "Check time")
 				end  
 
 				if (GetDistanceBetweenCoords(pos.x, pos.y, pos.z, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, true) < 1.5) then
-					QBCore.Functions.DrawText3D(Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, "~g~E~w~ - Canteen")
+					N1Core.Functions.DrawText3D(Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, "~g~E~w~ - Canteen")
 					if IsControlJustReleased(0, Keys["E"]) then
                         local ShopItems = {}
                         ShopItems.label = "Prison canteen"
@@ -137,7 +137,7 @@ Citizen.CreateThread(function()
 					end
 					DrawMarker(2, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 255, 55, 22, 222, false, false, false, 1, false, false, false)
 				elseif (GetDistanceBetweenCoords(pos.x, pos.y, pos.z, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, true) < 2.5) then
-					QBCore.Functions.DrawText3D(Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, "Canteen")
+					N1Core.Functions.DrawText3D(Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, "Canteen")
 					DrawMarker(2, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 255, 55, 22, 222, false, false, false, 1, false, false, false)
 				elseif (GetDistanceBetweenCoords(pos.x, pos.y, pos.z, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, true) < 10) then
 					DrawMarker(2, Config.Locations["shop"].coords.x, Config.Locations["shop"].coords.y, Config.Locations["shop"].coords.z, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.3, 0.2, 255, 55, 22, 222, false, false, false, 1, false, false, false)
@@ -149,18 +149,18 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+RegisterNetEvent('N1Core:Client:OnPlayerLoaded')
+AddEventHandler('N1Core:Client:OnPlayerLoaded', function()
 	isLoggedIn = true
-	QBCore.Functions.GetPlayerData(function(PlayerData)
+	N1Core.Functions.GetPlayerData(function(PlayerData)
 		if PlayerData.metadata["injail"] > 0 then
 			TriggerEvent("prison:client:Enter", PlayerData.metadata["injail"])
 		end
 	end)
 end)
 
-RegisterNetEvent('QBCore:Client:OnPlayerUnload')
-AddEventHandler('QBCore:Client:OnPlayerUnload', function()
+RegisterNetEvent('N1Core:Client:OnPlayerUnload')
+AddEventHandler('N1Core:Client:OnPlayerUnload', function()
 	isLoggedIn = false
 	inJail = false
 	currentJob = nil
@@ -169,7 +169,7 @@ end)
 
 RegisterNetEvent('prison:client:Enter')
 AddEventHandler('prison:client:Enter', function(time)
-	QBCore.Functions.Notify("You are in prison for "..time.." months..", "error")
+	N1Core.Functions.Notify("You are in prison for "..time.." months..", "error")
 	TriggerEvent("chatMessage", "SYSTEM", "warning", "Your property has been confiscated, you will get everything back when your time is up..")
 	DoScreenFadeOut(500)
 	while not IsScreenFadedOut() do
@@ -194,13 +194,13 @@ AddEventHandler('prison:client:Enter', function(time)
 	Citizen.Wait(2000)
 
 	DoScreenFadeIn(1000)
-	QBCore.Functions.Notify("Do some work for sentence reduction, current job: "..Config.Jobs[currentJob])
+	N1Core.Functions.Notify("Do some work for sentence reduction, current job: "..Config.Jobs[currentJob])
 end)
 
 RegisterNetEvent('prison:client:Leave')
 AddEventHandler('prison:client:Leave', function()
 	if jailTime > 0 then 
-		QBCore.Functions.Notify("You still have "..jailTime.." months in jail..")
+		N1Core.Functions.Notify("You still have "..jailTime.." months in jail..")
 	else
 		jailTime = 0
 		TriggerServerEvent("prison:server:SetJailStatus", 0)
@@ -214,7 +214,7 @@ AddEventHandler('prison:client:Leave', function()
 		TimeBlip = nil
 		RemoveBlip(ShopBlip)
 		ShopBlip = nil
-		QBCore.Functions.Notify("You are free! Enjoy it :)")
+		N1Core.Functions.Notify("You are free! Enjoy it :)")
 		DoScreenFadeOut(500)
 		while not IsScreenFadedOut() do
 			Citizen.Wait(10)
@@ -242,7 +242,7 @@ AddEventHandler('prison:client:UnjailPerson', function()
 		TimeBlip = nil
 		RemoveBlip(ShopBlip)
 		ShopBlip = nil
-		QBCore.Functions.Notify("You are free! Enjoy it :)")
+		N1Core.Functions.Notify("You are free! Enjoy it :)")
 		DoScreenFadeOut(500)
 		while not IsScreenFadedOut() do
 			Citizen.Wait(10)

@@ -1,12 +1,12 @@
 local nbrDisplaying = 0
 
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function() 
     while true do
         Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent("QBCore:GetObject", function(obj) QBCore = obj end)    
+        if N1Core == nil then
+            TriggerEvent("N1Core:GetObject", function(obj) N1Core = obj end)    
             Citizen.Wait(200)
         end
     end

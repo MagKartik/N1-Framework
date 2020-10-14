@@ -1,8 +1,8 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+N1Core = nil
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
-QBCore.Commands.Add("radar", "Toggle speed radar :)", {}, false, function(source, args)
-	local Player = QBCore.Functions.GetPlayer(source)
+N1Core.Commands.Add("radar", "Toggle speed radar :)", {}, false, function(source, args)
+	local Player = N1Core.Functions.GetPlayer(source)
     if Player.PlayerData.job.name == "police" then
         TriggerClientEvent("wk:toggleRadar", source)
     else

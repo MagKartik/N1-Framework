@@ -1,51 +1,51 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+N1Core = nil
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
 -- Code
 
 local BankStatus = {}
 
-RegisterServerEvent('qb-banking:server:SetBankClosed')
-AddEventHandler('qb-banking:server:SetBankClosed', function(BankId, bool)
+RegisterServerEvent('N1-banking:server:SetBankClosed')
+AddEventHandler('N1-banking:server:SetBankClosed', function(BankId, bool)
   print(BankId)
   BankStatus[BankId] = bool
-  TriggerClientEvent('qb-banking:client:SetBankClosed', -1, BankId, bool)
+  TriggerClientEvent('N1-banking:client:SetBankClosed', -1, BankId, bool)
 end)
 
 RegisterServerEvent('bank:withdraw')
 AddEventHandler('bank:withdraw', function(amount)
     local src = source
-    local ply = QBCore.Functions.GetPlayer(src)
+    local ply = N1Core.Functions.GetPlayer(src)
     local bankamount = ply.PlayerData.money["bank"]
     local amount = tonumber(amount)
     if bankamount >= amount and amount > 0 then
       ply.Functions.RemoveMoney('bank', amount, "Bank withdraw")
-      TriggerEvent("qb-log:server:CreateLog", "banking", "Withdraw", "red", "**"..GetPlayerName(src) .. "** has withdrawn ₹"..amount.." from their bank account.")
+      TriggerEvent("N1-log:server:CreateLog", "banking", "Withdraw", "red", "**"..GetPlayerName(src) .. "** has withdrawn ₹"..amount.." from their bank account.")
       ply.Functions.AddMoney('cash', amount, "Bank withdraw")
     else
-      TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough money on your bank..', 'error')
+      TriggerClientEvent('N1Core:Notify', src, 'You don\'t have enough money on your bank..', 'error')
     end
 end)
 
 RegisterServerEvent('bank:deposit')
 AddEventHandler('bank:deposit', function(amount)
     local src = source
-    local ply = QBCore.Functions.GetPlayer(src)
+    local ply = N1Core.Functions.GetPlayer(src)
     local cashamount = ply.PlayerData.money["cash"]
     local amount = tonumber(amount)
     if cashamount >= amount and amount > 0 then
       ply.Functions.RemoveMoney('cash', amount, "Bank depost")
-      TriggerEvent("qb-log:server:CreateLog", "banking", "Deposit", "green", "**"..GetPlayerName(src) .. "** has deposited ₹"..amount.." to their bank account.")
+      TriggerEvent("N1-log:server:CreateLog", "banking", "Deposit", "green", "**"..GetPlayerName(src) .. "** has deposited ₹"..amount.." to their bank account.")
       ply.Functions.AddMoney('bank', amount, "Bank depost")
     else
-      TriggerClientEvent('QBCore:Notify', src, 'You don\'t have enough cash..', 'error')
+      TriggerClientEvent('N1Core:Notify', src, 'You don\'t have enough cash..', 'error')
     end
 end)
 
-QBCore.Commands.Add("givecash", "Give some cash to a player", {{name="id", help="Player ID"},{name="amount", help="Amount of money"}}, true, function(source, args)
-  local Player = QBCore.Functions.GetPlayer(source)
+N1Core.Commands.Add("givecash", "Give some cash to a player", {{name="id", help="Player ID"},{name="amount", help="Amount of money"}}, true, function(source, args)
+  local Player = N1Core.Functions.GetPlayer(source)
   local TargetId = tonumber(args[1])
-  local Target = QBCore.Functions.GetPlayer(TargetId)
+  local Target = N1Core.Functions.GetPlayer(TargetId)
   local amount = tonumber(args[2])
   
   if Target ~= nil then
@@ -74,8 +74,8 @@ end)
 RegisterServerEvent('banking:server:giveCash')
 AddEventHandler('banking:server:giveCash', function(trgtId, amount)
   local src = source
-  local Player = QBCore.Functions.GetPlayer(src)
-  local Target = QBCore.Functions.GetPlayer(trgtId)
+  local Player = N1Core.Functions.GetPlayer(src)
+  local Target = N1Core.Functions.GetPlayer(trgtId)
 
   print(src)
   print(trgtId)
@@ -84,12 +84,12 @@ AddEventHandler('banking:server:giveCash', function(trgtId, amount)
     Player.Functions.RemoveMoney('cash', amount, "Cash given to "..Player.PlayerData.citizenid)
     Target.Functions.AddMoney('cash', amount, "Cash received from "..Target.PlayerData.citizenid)
 
-    TriggerEvent("qb-log:server:CreateLog", "banking", "Give cash", "blue", "**"..GetPlayerName(src) .. "** has given ₹"..amount.." to **" .. GetPlayerName(trgtId) .. "**")
+    TriggerEvent("N1-log:server:CreateLog", "banking", "Give cash", "blue", "**"..GetPlayerName(src) .. "** has given ₹"..amount.." to **" .. GetPlayerName(trgtId) .. "**")
     
-    TriggerClientEvent('QBCore:Notify', trgtId, "You received ₹"..amount.." from "..Player.PlayerData.charinfo.firstname.."!", 'success')
-    TriggerClientEvent('QBCore:Notify', src, "You gave ₹"..amount.." to "..Target.PlayerData.charinfo.firstname.."!", 'success')
+    TriggerClientEvent('N1Core:Notify', trgtId, "You received ₹"..amount.." from "..Player.PlayerData.charinfo.firstname.."!", 'success')
+    TriggerClientEvent('N1Core:Notify', src, "You gave ₹"..amount.." to "..Target.PlayerData.charinfo.firstname.."!", 'success')
   else
-    TriggerEvent("qb-anticheat:server:banPlayer", "Cheating")
-    TriggerEvent("qb-log:server:CreateLog", "anticheat", "Banned player! (Not really its a test, duhhhhh)", "red", "** @everyone " ..GetPlayerName(player).. "** tried to give **"..amount.." to himself")  
+    TriggerEvent("N1-anticheat:server:banPlayer", "Cheating")
+    TriggerEvent("N1-log:server:CreateLog", "anticheat", "Banned player! (Not really its a test, duhhhhh)", "red", "** @everyone " ..GetPlayerName(player).. "** tried to give **"..amount.." to himself")  
   end
 end)

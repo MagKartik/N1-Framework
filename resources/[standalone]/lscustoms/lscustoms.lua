@@ -9,13 +9,13 @@ Keys = {
 	['LEFT'] = 174, ['RIGHT'] = 175, ['TOP'] = 27, ['DOWN'] = 173,
 }
 
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
-		if QBCore == nil then
-			TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+		if N1Core == nil then
+			TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 			Citizen.Wait(200)
 		end
 	end
@@ -98,8 +98,8 @@ local function SetupModPrices()
 	local model = GetEntityModel(vehicle)
 	local percentage = 5
 	local vehiclePrice = 50000
-	if QBCore.Shared.VehicleModels[model] ~= nil then
-		vehiclePrice = QBCore.Shared.VehicleModels[model]["price"]
+	if N1Core.Shared.VehicleModels[model] ~= nil then
+		vehiclePrice = N1Core.Shared.VehicleModels[model]["price"]
 	end
 	for k, v in pairs(LSC_Config.prices.mods[11]) do
 		local price = ((vehiclePrice / 100) * percentage) + LSC_Config.prices.mods[11][k].DefaultPrice
@@ -278,7 +278,7 @@ local function DriveInGarage()
 	CurrentFuel = exports['LegacyFuel']:GetFuel(veh)
 	LSCMenu.buttons = {}
 
-	QBCore.Functions.TriggerCallback('qb-vehicletuning:server:GetStatus', function(dmg)
+	N1Core.Functions.TriggerCallback('N1-vehicletuning:server:GetStatus', function(dmg)
 		if dmg ~= nil then
 			DamageStatus = dmg
 		else
@@ -689,7 +689,7 @@ local function DriveInGarage()
 			end
 			Citizen.Wait(100)
 			
-			QBCore.Functions.TriggerCallback('qb-vehicletuning:server:IsMechanicAvailable', function(Mechanic)
+			N1Core.Functions.TriggerCallback('N1-vehicletuning:server:IsMechanicAvailable', function(Mechanic)
 				if Mechanic >= 2 then
 					LSCMenu:Open("categories")
 				else
@@ -715,7 +715,7 @@ local function DriveOutOfGarage(pos)
 		
 		pos = currentpos
 
-		QBCore.Functions.Progressbar("vehicletune_editvehicle", "Working on vehicle..", (editCount * 500), false, false, {
+		N1Core.Functions.Progressbar("vehicletune_editvehicle", "Working on vehicle..", (editCount * 500), false, false, {
 			disableMovement = true,
 			disableCarMovement = true,
 			disableMouse = false,
@@ -741,7 +741,7 @@ local function DriveOutOfGarage(pos)
 			currentgarage = 0
 			SetPlayerControl(PlayerId(),true)
 	
-			TriggerServerEvent("lscustoms:server:SaveVehicleProps", QBCore.Functions.GetVehicleProperties(veh))
+			TriggerServerEvent("lscustoms:server:SaveVehicleProps", N1Core.Functions.GetVehicleProperties(veh))
 		end)
 	end)
 end

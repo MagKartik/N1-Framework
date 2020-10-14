@@ -27,14 +27,14 @@ local Gates = {
 Citizen.CreateThread(function()
     Citizen.Wait(500)
     requiredItems = {
-        [1] = {name = QBCore.Shared.Items["electronickit"]["name"], image = QBCore.Shared.Items["electronickit"]["image"]},
-        [2] = {name = QBCore.Shared.Items["gatecrack"]["name"], image = QBCore.Shared.Items["gatecrack"]["image"]},
+        [1] = {name = N1Core.Shared.Items["electronickit"]["name"], image = N1Core.Shared.Items["electronickit"]["image"]},
+        [2] = {name = N1Core.Shared.Items["gatecrack"]["name"], image = N1Core.Shared.Items["gatecrack"]["image"]},
     }
     while true do 
         Citizen.Wait(5)
         inRange = false
         currentGate = 0
-        if isLoggedIn and QBCore ~= nil then
+        if isLoggedIn and N1Core ~= nil then
             if PlayerJob.name ~= "police" then
                 local pos = GetEntityCoords(GetPlayerPed(-1))
                 for k, v in pairs(Gates) do
@@ -43,9 +43,9 @@ Citizen.CreateThread(function()
                         currentGate = k
                         inRange = true
                         if securityLockdown then
-                            QBCore.Functions.DrawText3D(Gates[k].coords.x, Gates[k].coords.y, Gates[k].coords.z, "~r~SYSTEM LOCKDOWN")
+                            N1Core.Functions.DrawText3D(Gates[k].coords.x, Gates[k].coords.y, Gates[k].coords.z, "~r~SYSTEM LOCKDOWN")
                         elseif Gates[k].hit then
-                            QBCore.Functions.DrawText3D(Gates[k].coords.x, Gates[k].coords.y, Gates[k].coords.z, "SYSTEM BREACH")
+                            N1Core.Functions.DrawText3D(Gates[k].coords.x, Gates[k].coords.y, Gates[k].coords.z, "SYSTEM BREACH")
                         elseif not requiredItemsShowed then
                             requiredItemsShowed = true
                             TriggerEvent('inventory:client:requiredItems', requiredItems, true)
@@ -85,7 +85,7 @@ Citizen.CreateThread(function()
             ShopBlip = nil
             TriggerServerEvent("prison:server:SecurityLockdown")
             TriggerEvent('prison:client:PrisonBreakAlert')
-            QBCore.Functions.Notify("You escaped.. Get out of here!", "error")
+            N1Core.Functions.Notify("You escaped.. Get out of here!", "error")
 		end
 	end
 end)
@@ -93,10 +93,10 @@ end)
 RegisterNetEvent('electronickit:UseElectronickit')
 AddEventHandler('electronickit:UseElectronickit', function()
     if currentGate ~= 0 and not securityLockdown and not Gates[currentGate].hit then 
-        QBCore.Functions.TriggerCallback('QBCore:HasItem', function(result)
+        N1Core.Functions.TriggerCallback('N1Core:HasItem', function(result)
             if result then 
                 TriggerEvent('inventory:client:requiredItems', requiredItems, false)
-                QBCore.Functions.Progressbar("hack_gate", "Connecting Electronic kit..", math.random(5000, 10000), false, true, {
+                N1Core.Functions.Progressbar("hack_gate", "Connecting Electronic kit..", math.random(5000, 10000), false, true, {
                     disableMovement = true,
                     disableCarMovement = true,
                     disableMouse = false,
@@ -111,10 +111,10 @@ AddEventHandler('electronickit:UseElectronickit', function()
                     TriggerEvent("mhacking:start", math.random(5, 9), math.random(10, 18), OnHackDone)
                 end, function() -- Cancel
                     StopAnimTask(GetPlayerPed(-1), "anim@gangops@facility@servers@", "hotwire", 1.0)
-                    QBCore.Functions.Notify("Canceled..", "error")
+                    N1Core.Functions.Notify("Canceled..", "error")
                 end)
             else
-                QBCore.Functions.Notify("You are missing something..", "error")
+                N1Core.Functions.Notify("You are missing something..", "error")
             end
         end, "gatecrack")
     end
@@ -131,7 +131,7 @@ end)
 RegisterNetEvent('prison:client:PrisonBreakAlert')
 AddEventHandler('prison:client:PrisonBreakAlert', function()
     -- TriggerEvent("chatMessage", "ALERT", "error", "Attentie alle eenheden! Poging tot uitbraak in de gevangenis!")
-    TriggerEvent('qb-policealerts:client:AddPoliceAlert', {
+    TriggerEvent('N1-policealerts:client:AddPoliceAlert', {
         timeOut = 10000,
         alertTitle = "Prison Break",
         details = {
@@ -144,7 +144,7 @@ AddEventHandler('prison:client:PrisonBreakAlert', function()
                 detail = "Route 68",
             },
         },
-        callSign = QBCore.Functions.GetPlayerData().metadata["callsign"],
+        callSign = N1Core.Functions.GetPlayerData().metadata["callsign"],
     })
 
     local BreakBlip = AddBlipForCoord(Config.Locations["middle"].coords.x, Config.Locations["middle"].coords.y, Config.Locations["middle"].coords.z)
@@ -172,7 +172,7 @@ end)
 function OnHackDone(success, timeremaining)
     if success then
         TriggerServerEvent("prison:server:SetGateHit", currentGate)
-		TriggerServerEvent('qb-doorlock:server:updateState', Gates[currentGate].gatekey, false)
+		TriggerServerEvent('N1-doorlock:server:updateState', Gates[currentGate].gatekey, false)
 		TriggerEvent('mhacking:hide')
     else
         TriggerServerEvent("prison:server:SecurityLockdown")

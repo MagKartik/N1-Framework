@@ -1,10 +1,10 @@
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(10)
-		if QBCore == nil then
-			TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+		if N1Core == nil then
+			TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 			Citizen.Wait(200)
 		end
 	end
@@ -31,8 +31,8 @@ Citizen.CreateThread(function()
 	end
 end)
 
-RegisterNetEvent("qb-seatshuff:client:Shuff")
-AddEventHandler("qb-seatshuff:client:Shuff", function()
+RegisterNetEvent("N1-seatshuff:client:Shuff")
+AddEventHandler("N1-seatshuff:client:Shuff", function()
 	local ped = GetPlayerPed(-1)
 	if IsPedInAnyVehicle(ped, false) then
 		disableShuffle = false

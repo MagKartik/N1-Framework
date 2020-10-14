@@ -1,6 +1,6 @@
-QBCore = nil
+N1Core = nil
 
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
 RegisterServerEvent("houses:server:sethousedoorstate")
 AddEventHandler("houses:server:sethousedoorstate", function(house, state)
@@ -24,6 +24,6 @@ function HasKey(identifier, house)
 end
 
 -- can be changed
-QBCore.Commands.Add("decorate", "Decorate your house", {}, false, function(source, args)
+N1Core.Commands.Add("decorate", "Decorate your house", {}, false, function(source, args)
 	TriggerClientEvent("houses:client:decorate", source)
 end)

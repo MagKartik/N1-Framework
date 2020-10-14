@@ -1,15 +1,15 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+N1Core = nil
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
-QBCore.Commands.Add("am", "Toggle animation menu", {}, false, function(source, args)
+N1Core.Commands.Add("am", "Toggle animation menu", {}, false, function(source, args)
 	TriggerClientEvent('animations:client:ToggleMenu', source)
 end)
 
-QBCore.Commands.Add("a", "Do an animation, for the animation list do /am", {{name = "name", help = "Emote name"}}, true, function(source, args)
+N1Core.Commands.Add("a", "Do an animation, for the animation list do /am", {{name = "name", help = "Emote name"}}, true, function(source, args)
 	TriggerClientEvent('animations:client:EmoteCommandStart', source, args)
 end)
 
-QBCore.Functions.CreateUseableItem("walkstick", function(source, item)
-    local Player = QBCore.Functions.GetPlayer(source)
+N1Core.Functions.CreateUseableItem("walkstick", function(source, item)
+    local Player = N1Core.Functions.GetPlayer(source)
     TriggerClientEvent("animations:UseWandelStok", source)
 end)

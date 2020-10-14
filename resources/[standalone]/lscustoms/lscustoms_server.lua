@@ -1,5 +1,5 @@
-QBCore = nil
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+N1Core = nil
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
 RegisterServerEvent('lscustoms:server:setGarageBusy')
 AddEventHandler('lscustoms:server:setGarageBusy', function(garage, busy)
@@ -9,19 +9,19 @@ end)
 RegisterServerEvent("LSC:buttonSelected")
 AddEventHandler("LSC:buttonSelected", function(name, button)
 	local src = source
-	local Player = QBCore.Functions.GetPlayer(src)
+	local Player = N1Core.Functions.GetPlayer(src)
 	local bankBalance = Player.PlayerData.money["bank"]
 	if not button.purchased then
 		if button.price then -- check if button have price
 			if Player.Functions.RemoveMoney("cash", button.price, "lscustoms-bought") then
 				TriggerClientEvent("LSC:buttonSelected", source, name, button, true)
-				TriggerEvent("qb-log:server:sendLog", Player.PlayerData.citizenid, "vehicleupgraded", {name=name, moneyType="cash", price=button.price, plate="unkown"})
-				TriggerEvent("qb-log:server:CreateLog", "vehicleupgrades", "Upgrade bought", "green", "**"..GetPlayerName(src).."** has bought an upgrade ("..name..") for ₹" .. button.price)
+				TriggerEvent("N1-log:server:sendLog", Player.PlayerData.citizenid, "vehicleupgraded", {name=name, moneyType="cash", price=button.price, plate="unkown"})
+				TriggerEvent("N1-log:server:CreateLog", "vehicleupgrades", "Upgrade bought", "green", "**"..GetPlayerName(src).."** has bought an upgrade ("..name..") for ₹" .. button.price)
 			elseif bankBalance >= button.price then
 				Player.Functions.RemoveMoney("bank", button.price, "lscustoms-bought")
 				TriggerClientEvent("LSC:buttonSelected", source, name, button, true)
-				TriggerEvent("qb-log:server:sendLog", Player.PlayerData.citizenid, "vehicleupgraded", {name=name, moneyType="bank", price=button.price, plate="unkown"})
-				TriggerEvent("qb-log:server:CreateLog", "vehicleupgrades", "Upgrade bought", "green", "**"..GetPlayerName(src).."** has bought an upgrade ("..name..") for ₹" .. button.price)
+				TriggerEvent("N1-log:server:sendLog", Player.PlayerData.citizenid, "vehicleupgraded", {name=name, moneyType="bank", price=button.price, plate="unkown"})
+				TriggerEvent("N1-log:server:CreateLog", "vehicleupgrades", "Upgrade bought", "green", "**"..GetPlayerName(src).."** has bought an upgrade ("..name..") for ₹" .. button.price)
 			else
 				TriggerClientEvent("LSC:buttonSelected", source, name, button, false)
 			end
@@ -35,13 +35,13 @@ RegisterServerEvent("lscustoms:server:SaveVehicleProps")
 AddEventHandler("lscustoms:server:SaveVehicleProps", function(vehicleProps)
 	local src = source
     if IsVehicleOwned(vehicleProps.plate) then
-        QBCore.Functions.ExecuteSql(false, "UPDATE `player_vehicles` SET `mods` = '"..json.encode(vehicleProps).."' WHERE `plate` = '"..vehicleProps.plate.."'")
+        N1Core.Functions.ExecuteSql(false, "UPDATE `player_vehicles` SET `mods` = '"..json.encode(vehicleProps).."' WHERE `plate` = '"..vehicleProps.plate.."'")
     end
 end)
 
 function IsVehicleOwned(plate)
     local retval = false
-    QBCore.Functions.ExecuteSql(true, "SELECT * FROM `player_vehicles` WHERE `plate` = '"..plate.."'", function(result)
+    N1Core.Functions.ExecuteSql(true, "SELECT * FROM `player_vehicles` WHERE `plate` = '"..plate.."'", function(result)
         if result[1] ~= nil then
             retval = true
         end
@@ -49,6 +49,6 @@ function IsVehicleOwned(plate)
     return retval
 end
 
-QBCore.Commands.Add("livery", "Livery", {{name="livery", help="Nummer van de livery"}}, true, function(source, args)
+N1Core.Commands.Add("livery", "Livery", {{name="livery", help="Nummer van de livery"}}, true, function(source, args)
 	TriggerClientEvent('lscustoms:SetLivery', source, tonumber(args[1]))
 end, "admin")

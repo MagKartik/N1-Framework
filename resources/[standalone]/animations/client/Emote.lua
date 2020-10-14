@@ -48,7 +48,7 @@ AddEventHandler('animations:client:SmokeWeed', function()
   Citizen.CreateThread(function()
     while SmokingWeed do
       Citizen.Wait(10000)
-      TriggerServerEvent('qb-hud:Server:RelieveStress', math.random(15, 18))
+      TriggerServerEvent('N1-hud:Server:RelieveStress', math.random(15, 18))
       RelieveCount = RelieveCount + 1
       if RelieveCount == 6 then
         if ChosenDict == "MaleScenario" and IsInAnimation then
@@ -81,7 +81,7 @@ AddEventHandler('animations:client:EmoteCommandStart', function(args)
   if CanDoEmote then
     EmoteCommandStart(args)
   else
-    QBCore.Functions.Notify("You can\'t do any emotes right now", "error")
+    N1Core.Functions.Notify("You can\'t do any emotes right now", "error")
   end
 end)
 

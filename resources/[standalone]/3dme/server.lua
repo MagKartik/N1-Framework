@@ -1,10 +1,10 @@
-QBCore = nil
+N1Core = nil
 
-TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
 
-QBCore.Commands.Add("me", "Character interactions", {}, false, function(source, args)
+N1Core.Commands.Add("me", "Character interactions", {}, false, function(source, args)
 	local text = table.concat(args, ' ')
-	local Player = QBCore.Functions.GetPlayer(source)
+	local Player = N1Core.Functions.GetPlayer(source)
 	TriggerClientEvent('3dme:triggerDisplay', -1, text, source)
-    TriggerEvent("qb-log:server:CreateLog", "me", "Me", "white", "**"..GetPlayerName(source).."** (CitizenID: "..Player.PlayerData.citizenid.." | ID: "..source..")** " ..Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname.. " **" ..text, false)
+    TriggerEvent("N1-log:server:CreateLog", "me", "Me", "white", "**"..GetPlayerName(source).."** (CitizenID: "..Player.PlayerData.citizenid.." | ID: "..source..")** " ..Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname.. " **" ..text, false)
 end)

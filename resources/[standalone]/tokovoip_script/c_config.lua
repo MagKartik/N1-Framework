@@ -6,14 +6,14 @@ TokoVoipConfig = {
 
 	distance = {
 		5, -- Whisper speech distance in gta distance units
-		15, -- Normal speech distance in gta distance units
-		40, -- Shout speech distance in gta distance units
+		8, -- Normal speech distance in gta distance units
+		12, -- Shout speech distance in gta distance units
 	},
 	headingType = 0, -- headingType 0 uses GetGameplayCamRot, basing heading on the camera's heading, to match how other GTA sounds work. headingType 1 uses GetEntityHeading which is based on the character's direction
 	radioKey = Keys["CAPS"], -- Keybind used to talk on the radio
 	keySwitchChannels = Keys["~"], -- Keybind used to switch the radio channels
 	keySwitchChannelsSecondary = Keys["LEFTSHIFT"], -- If set, both the keySwitchChannels and keySwitchChannelsSecondary keybinds must be pressed to switch the radio channels
-	keyProximity = Keys["~"], -- Keybind used to switch the proximity mode
+	keyProximity = Keys["Y"], -- Keybind used to switch the proximity mode
 	radioClickMaxChannel = 500, -- Set the max amount of radio channels that will have local radio clicks enabled
 	radioAnim = true, -- Enable or disable the radio animation
 	radioEnabled = true, -- Enable or disable using the radio
@@ -22,18 +22,18 @@ TokoVoipConfig = {
 		-- TeamSpeak channel name used by the voip
 		-- If the TSChannelWait is enabled, players who are currently in TSChannelWait will be automatically moved
 		-- to the TSChannel once everything is running
-		TSChannel = "Lobby",
-		TSPassword = "%V#v~$x6b;CybuT", -- TeamSpeak channel password (can be empty)
+		TSChannel = "Server #1 India WL",
+		TSPassword = "123456", -- TeamSpeak channel password (can be empty)
 
 		-- Optional: TeamSpeak waiting channel name, players wait in this channel and will be moved to the TSChannel automatically
 		-- If the TSChannel is public and people can join directly, you can leave this empty and not use the auto-move
 		TSChannelWait = "Lobby",
 
 		-- Blocking screen informations
-		TSServer = "ts3.qbusroleplay.nl", -- TeamSpeak server address to be displayed on blocking screen
+		TSServer = "139.99.124.144:9025", -- TeamSpeak server address to be displayed on blocking screen
 		TSChannelSupport = "Waiting for help", -- TeamSpeak support channel name displayed on blocking screen
 		TSChannelWhitelist = { -- Black screen will not be displayed when users are in those TS channels
-			"Help channel",
+			"Staff",
 		},
 
 		-- The following is purely TS client settings, to match tastes

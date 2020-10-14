@@ -9,13 +9,13 @@ local Keys = {
 	['LEFT'] = 174, ['RIGHT'] = 175, ['TOP'] = 27, ['DOWN'] = 173,
 }
 
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function() 
     while true do
         Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent("QBCore:GetObject", function(obj) QBCore = obj end)    
+        if N1Core == nil then
+            TriggerEvent("N1Core:GetObject", function(obj) N1Core = obj end)    
             Citizen.Wait(200)
         end
     end
@@ -89,13 +89,13 @@ function startClothes(hasToPay)
 	if firstChar then
 		TriggerEvent("doIntroCam")
 	elseif hasToPay then
-		QBCore.Functions.GetPlayerData(function(PlayerData)
+		N1Core.Functions.GetPlayerData(function(PlayerData)
 			local cashBalance = PlayerData.money["cash"]
 			local cashBalance = PlayerData.money["bank"]
 			if cashBalance >= 100 or cashBalance >= 100 then
 				TriggerServerEvent("clothes:server:PayClothes")
 			else
-				QBCore.Functions.Notify("You don\'t have enough money! (₹100,-)")
+				N1Core.Functions.Notify("You don\'t have enough money! (₹100,-)")
 			end
 		end)
 	end
@@ -836,8 +836,8 @@ AddEventHandler("doIntroCam", function()
 	camOff()
 end)
 
-RegisterNetEvent("QBCore:Client:OnPlayerLoaded")
-AddEventHandler("QBCore:Client:OnPlayerLoaded", function()
+RegisterNetEvent("N1Core:Client:OnPlayerLoaded")
+AddEventHandler("N1Core:Client:OnPlayerLoaded", function()
 	TriggerServerEvent("clothes:loadPlayerSkin")
 end)
 
@@ -846,7 +846,7 @@ AddEventHandler("clothes:loadSkin", function(new, model, data)
 	SetEntityInvincible(GetPlayerPed(-1),true)
 	local function setDefault()
 		Citizen.CreateThread(function()
-			QBCore.Functions.GetPlayerData(function(PlayerData)
+			N1Core.Functions.GetPlayerData(function(PlayerData)
 				firstChar = true
 				if PlayerData.charinfo.gender == 0 then
 					TriggerEvent("maleclothesstart", true)
@@ -1181,12 +1181,12 @@ Citizen.CreateThread(function()
 		Citizen.Wait(1)
 		local nearcloth = IsNearClothes()
 
-		if nearcloth < 5.0 and cmenu.show == 0 and QBCore ~= nil then
+		if nearcloth < 5.0 and cmenu.show == 0 and N1Core ~= nil then
 			local pos = GetEntityCoords(GetPlayerPed(-1))
-			QBCore.Functions.DrawText3D(pos.x, pos.y, pos.z, "~g~E~w~ - To change your clothes / ~g~H~w~ - To save your clothes")
+			N1Core.Functions.DrawText3D(pos.x, pos.y, pos.z, "~g~E~w~ - To change your clothes / ~g~H~w~ - To save your clothes")
 			if IsControlJustPressed(1, Keys["E"]) then
 				clothingbad()
-				QBCore.Functions.GetPlayerData(function(PlayerData)
+				N1Core.Functions.GetPlayerData(function(PlayerData)
 					if PlayerData.charinfo.gender == 0 then
 						TriggerEvent("maleclothesstart", true)
 					else
@@ -1347,7 +1347,7 @@ end)
 
 RegisterNetEvent("clothes:client::adjustfacewear")
 AddEventHandler("clothes:client::adjustfacewear",function(type)
-	if QBCore.Functions.GetPlayerData().metadata["ishandcuffed"] then return end
+	if N1Core.Functions.GetPlayerData().metadata["ishandcuffed"] then return end
 	removeWear = not removeWear
 	local AnimSet = "none"
 	local AnimationOn = "none"

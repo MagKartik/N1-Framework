@@ -12,12 +12,12 @@ Keys = {
 
 local plateChecked = nil
 
-QBCore = nil
+N1Core = nil
 Citizen.CreateThread(function() 
     while true do
         Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent("QBCore:GetObject", function(obj) QBCore = obj end)    
+        if N1Core == nil then
+            TriggerEvent("N1Core:GetObject", function(obj) N1Core = obj end)    
             Citizen.Wait(200)
         end
     end
@@ -106,7 +106,7 @@ local radarInfo =
 
 RegisterNetEvent('wk:toggleRadar')
 AddEventHandler('wk:toggleRadar', function()
-    QBCore.Functions.GetPlayerData(function(PlayerData)
+    N1Core.Functions.GetPlayerData(function(PlayerData)
         if PlayerData.job.name == "police" then
             local ped = GetPlayerPed( -1 )
             if (IsPedInAnyVehicle( ped ) ) then 
@@ -126,10 +126,10 @@ AddEventHandler('wk:toggleRadar', function()
                         bwdmode = radarInfo.bwdMode
                     })
                 else 
-                    QBCore.Functions.Notify( "You must be in a police vehicle!", "error")
+                    N1Core.Functions.Notify( "You must be in a police vehicle!", "error")
                 end 
             else 
-                QBCore.Functions.Notify( "You must be in a vehicle!", "error")
+                N1Core.Functions.Notify( "You must be in a vehicle!", "error")
             end 
         end
     end)
@@ -138,7 +138,7 @@ end)
 RegisterNetEvent( 'wk:changeRadarLimit' )
 AddEventHandler( 'wk:changeRadarLimit', function( speed ) 
     radarInfo.fastLimit = speed 
-    QBCore.Functions.Notify("Max speed set on: " .. speed .. "km/u")
+    N1Core.Functions.Notify("Max speed set on: " .. speed .. "km/u")
 end )
 
 function Radar_SetLimit()
@@ -299,7 +299,7 @@ function ManageVehicleRadar()
                             SendNUIMessage( { lockfwdfast = true } )
                         end 
                         if plateChecked ~= fwdPlate then
-                            QBCore.Functions.TriggerCallback('police:IsPlateFlagged', function(result)
+                            N1Core.Functions.TriggerCallback('police:IsPlateFlagged', function(result)
                                 if result then
                                     PlaySoundFrontend( -1, "Beep_Green", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
                                     Citizen.Wait(100)
@@ -312,7 +312,7 @@ function ManageVehicleRadar()
                                     radarInfo.fwdFastSpeed = fwdVehSpeed 
                                     radarInfo.fwdFastLocked = true 
                                     SendNUIMessage( { lockfwdfast = true } )
-                                    QBCore.Functions.Notify("Marked vehicle found!", "error")
+                                    N1Core.Functions.Notify("Marked vehicle found!", "error")
                                 end
                                 plateChecked = fwdPlate
                             end, fwdPlate)
@@ -356,7 +356,7 @@ function ManageVehicleRadar()
                             SendNUIMessage( { lockbwdfast = true } )
                         end 
                         if plateChecked ~= bwdPlate then
-                            QBCore.Functions.TriggerCallback('police:IsPlateFlagged', function(result)
+                            N1Core.Functions.TriggerCallback('police:IsPlateFlagged', function(result)
                                 if result then
                                     PlaySoundFrontend( -1, "Beep_Green", "DLC_HEIST_HACKING_SNAKE_SOUNDS", 1 )
                                     Citizen.Wait(100)
@@ -369,7 +369,7 @@ function ManageVehicleRadar()
                                     radarInfo.bwdFastSpeed = bwdVehSpeed 
                                     radarInfo.bwdFastLocked = true 
                                     SendNUIMessage( { lockbwdfast = true } )
-                                    QBCore.Functions.Notify("Marked vehicle found!", "error")
+                                    N1Core.Functions.Notify("Marked vehicle found!", "error")
                                 end
                                 plateChecked = bwdPlate
                             end, bwdPlate)
@@ -487,35 +487,35 @@ end )
 Citizen.CreateThread( function()
     while true do 
         -- These control pressed natives must be the disabled check ones. 
-        if QBCore ~= nil then 
+        if N1Core ~= nil then 
             -- LCtrl is pressed and M has just been pressed 
             if ( IsDisabledControlPressed( 0, Keys["LEFTCTRL"] ) and IsDisabledControlJustPressed( 0, Keys["7"] ) ) then 
-                if QBCore.Functions.GetPlayerData().job.name == "police" and QBCore.Functions.GetPlayerData().job.onduty then
+                if N1Core.Functions.GetPlayerData().job.name == "police" and N1Core.Functions.GetPlayerData().job.onduty then
                     TriggerEvent( 'wk:radarRC' )
                 end
             end 
 
             -- LCtrl is not being pressed and M has just been pressed 
             if ( not IsDisabledControlPressed( 0, Keys["LEFTCTRL"] ) and IsDisabledControlJustPressed( 0, Keys["7"] ) ) then 
-                if QBCore.Functions.GetPlayerData().job.name == "police" and QBCore.Functions.GetPlayerData().job.onduty then
+                if N1Core.Functions.GetPlayerData().job.name == "police" and N1Core.Functions.GetPlayerData().job.onduty then
                     ResetFrontFast()
                     ResetRearFast()
                     ResetFrontAntenna()
                     ResetRearAntenna()
-                    QBCore.Functions.Notify("Police ANPR has been reset")
+                    N1Core.Functions.Notify("Police ANPR has been reset")
                 end
             end 
 
             if ( IsDisabledControlJustPressed( 0, Keys["8"] ) ) then 
-                if QBCore.Functions.GetPlayerData().job.name == "police" and QBCore.Functions.GetPlayerData().job.onduty then
+                if N1Core.Functions.GetPlayerData().job.name == "police" and N1Core.Functions.GetPlayerData().job.onduty then
                     radarInfo.plateLocked = not radarInfo.plateLocked
                     if (radarInfo.plateLocked) then
                         radarInfo.lockedPlate = radarInfo.fwdPlate
                         SendNUIMessage( { lockPlate = true } )
-                        QBCore.Functions.Notify("License plate locked: " .. radarInfo.fwdPlate)
+                        N1Core.Functions.Notify("License plate locked: " .. radarInfo.fwdPlate)
                     else
                         SendNUIMessage( { unlockPlate = true } )
-                        QBCore.Functions.Notify("License plate unlocked")
+                        N1Core.Functions.Notify("License plate unlocked")
                     end
                 end
             end

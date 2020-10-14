@@ -9,13 +9,13 @@ Keys = {
     ['LEFT'] = 174, ['RIGHT'] = 175, ['TOP'] = 27, ['DOWN'] = 173,
 }
 
-QBCore = nil
+N1Core = nil
 
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(10)
-        if QBCore == nil then
-            TriggerEvent('QBCore:GetObject', function(obj) QBCore = obj end)
+        if N1Core == nil then
+            TriggerEvent('N1Core:GetObject', function(obj) N1Core = obj end)
             Citizen.Wait(200)
         end
     end
@@ -127,8 +127,8 @@ local banks = {
   [7] = {name="Bank", Closed = false, id=108, x = 241.727,   y = 220.706,   z = 106.286},
 }
 
-RegisterNetEvent('qb-banking:client:SetBankClosed')
-AddEventHandler('qb-banking:client:SetBankClosed', function(BankId, bool)
+RegisterNetEvent('N1-banking:client:SetBankClosed')
+AddEventHandler('N1-banking:client:SetBankClosed', function(BankId, bool)
   banks[BankId].Closed = bool
 end)
 
@@ -170,9 +170,9 @@ local atmOpen = false
 function openGui()
   local ped = GetPlayerPed(-1)
   local playerPed = GetPlayerPed(-1)
-  local PlayerData = QBCore.Functions.GetPlayerData()
+  local PlayerData = N1Core.Functions.GetPlayerData()
   TaskStartScenarioInPlace(playerPed, "PROP_HUMAN_ATM", 0, true)
-  QBCore.Functions.Progressbar("use_bank", "Card is being read..", 2500, false, true, {}, {}, {}, {}, function() -- Done
+  N1Core.Functions.Progressbar("use_bank", "Card is being read..", 2500, false, true, {}, {}, {}, {}, function() -- Done
       ClearPedTasksImmediately(ped)
       SetNuiFocus(true, true)
       SendNUIMessage({
@@ -181,7 +181,7 @@ function openGui()
       })
   end, function() -- Cancel
       ClearPedTasksImmediately(ped)
-      QBCore.Functions.Notify("Canceled..", "error")
+      N1Core.Functions.Notify("Canceled..", "error")
   end)
 end
 
@@ -302,7 +302,7 @@ end)
 RegisterNUICallback('withdrawSubmit', function(data, cb)
   TriggerServerEvent('bank:withdraw', data.amount)
   SetTimeout(500, function()
-    local PlayerData = QBCore.Functions.GetPlayerData()
+    local PlayerData = N1Core.Functions.GetPlayerData()
     SendNUIMessage({
       updateBalance = true,
       PlayerData = PlayerData
@@ -314,7 +314,7 @@ end)
 RegisterNUICallback('depositSubmit', function(data, cb)
   TriggerServerEvent('bank:deposit', data.amount)
   SetTimeout(500, function()
-    local PlayerData = QBCore.Functions.GetPlayerData()
+    local PlayerData = N1Core.Functions.GetPlayerData()
     SendNUIMessage({
       updateBalance = true,
       PlayerData = PlayerData
@@ -381,7 +381,7 @@ function IsNearPlayer(player)
 end
 
 function GetClosestPlayer()
-  local closestPlayers = QBCore.Functions.GetPlayersFromCoords()
+  local closestPlayers = N1Core.Functions.GetPlayersFromCoords()
   local closestDistance = -1
   local closestPlayer = -1
   local coords = GetEntityCoords(GetPlayerPed(-1))
@@ -410,6 +410,6 @@ AddEventHandler('banking:client:CheckDistance', function(targetId, amount)
       TriggerServerEvent('banking:server:giveCash', playerId, amount)
     end
   else
-    QBCore.Functions.Notify('You are not nearby the person..', 'error')
+    N1Core.Functions.Notify('You are not nearby the person..', 'error')
   end
 end)
